@@ -23,6 +23,7 @@
 #include <QDialog>
 #include <QList>
 #include <QSettings>
+#include <QtWidgets/QAction>
 #include "qgifcreator.h"
 #include "retranslatable.h"
 #include "ui_gifwidget.h"

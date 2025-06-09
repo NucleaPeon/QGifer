@@ -24,8 +24,8 @@
 #include <QtDebug>
 using namespace std;
 
-//#define TRUE 1
-//#define FALSE 0
+#define TRUE 1
+#define FALSE 0
 
 void PrintGifError()
 {

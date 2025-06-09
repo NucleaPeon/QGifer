@@ -23,6 +23,7 @@
 #include <QDialog>
 #include <QProcess>
 #include <QSettings>
+#include <QStringList>
 #include "retranslatable.h"
 #include "ui_optimizerdialog.h"
 

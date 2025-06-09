@@ -100,9 +100,10 @@ void OptimizerDialog::setIMDir()
 	  return;
      }
      
-#if defined(Q_WS_X11)
+
+#if defined(Q_WS_X11) || defined(Q_OS_LINUX)
      path += "/convert";
-#elif defined(Q_WS_WIN)
+#elif defined(Q_WS_WIN) || defined(Q_OS_WIN)
      path += "\\convert.exe";
 #endif
 
@@ -198,9 +199,9 @@ void OptimizerDialog::fuzzChanged(int fuzz_value)
 QStringList OptimizerDialog::sysEnv()
 {
      QString s(getenv("PATH"));
-#if defined(Q_WS_X11)
+#if defined(Q_WS_X11) || defined(Q_OS_LINUX)
      return s.split(":",QString::SkipEmptyParts);
-#elif defined(Q_WS_WIN)
+#elif defined(Q_WS_WIN) || defined(Q_OS_WIN)
      return s.split(";",QString::SkipEmptyParts);
 #endif
 }
@@ -208,9 +209,9 @@ QStringList OptimizerDialog::sysEnv()
 QString OptimizerDialog::findConvert()
 {
      QString exec =
-#if defined(Q_WS_X11)
+#if defined(Q_WS_X11) || defined(Q_OS_LINUX)
 	  "/convert";
-#elif defined(Q_WS_WIN)
+#elif defined(Q_WS_WIN) || defined(Q_OS_WIN)
      "\\convert.exe";
 #endif
      QStringList env = sysEnv();

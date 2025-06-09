@@ -10,9 +10,9 @@
 #include <QtCore/QEvent>
 #include <QtCore/QTimer>
 
-#include <QtGui/QAction>
+#include <QtWidgets/QAction>
 #include <QtGui/QMouseEvent>
-#include <QtGui/QToolButton>
+#include <QtWidgets/QToolButton>
 
 
 class QPressAction : public QAction {

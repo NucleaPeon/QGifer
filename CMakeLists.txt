@@ -92,15 +92,7 @@ include_directories(BEFORE res)
 include_directories(BEFORE src)
 include_directories(BEFORE ui)
 
-# INCLUDE(${QT_USE_FILE})
-# ADD_DEFINITIONS(${QT_DEFINITIONS})
-
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -Wno-reorder -Wno-sign-compare" )
-# TODO Crosscompile
-#SET(CMAKE_SYSTEM_PROCESSOR "i686")
-#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=i686 -march=pentium" )
-#SET(CMAKE_SYSTEM_PROCESSOR "x86_64")
-
 
 SET(WINDOWS_EXEC )
 

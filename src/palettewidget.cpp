@@ -164,15 +164,15 @@ bool PaletteWidget::fromImage(const QImage& img, int palette_size, float mindiff
 	  return false;
      }
      
-
-     if (GifQuantizeBuffer(fimg.width(), fimg.height(), &size, 
-     			&(r[0]),&(g[0]),&(b[0]), &(output[0]), 
-     			palette->Colors) == GIF_ERROR) 
-     {
-     	  qDebug() << "quentize failed!";
-     	  palette = NULL;
-     	  return false; 
-     }
+    // GifQuantizeBuffer has been removed from giflib. It is no longer usable.
+     // if (GifQuantizeBuffer(fimg.width(), fimg.height(), &size,
+     // 			&(r[0]),&(g[0]),&(b[0]), &(output[0]),
+     // 			palette->Colors) == GIF_ERROR)
+     // {
+     // 	  qDebug() << "quentize failed!";
+     // 	  palette = NULL;
+     // 	  return false;
+     // }
 
      float df = difference(palette,previous);
      //qDebug() << "difference: " << df;

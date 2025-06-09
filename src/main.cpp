@@ -17,8 +17,7 @@
 **
 ************************************************************************/
 
-#include <QApplication>
-#include <QTextCodec>
+#include <QtWidgets/QApplication>
 #include <iostream>
 #include "mainwindow.h"
 #include "version.h"
@@ -28,8 +27,8 @@ void printUsage();
 int main(int argc, char* argv[])
 {
      QApplication* app = new QApplication(argc,argv);
-     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
-     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+     // QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+     // QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
      QString pro = "";
      if(argc == 2 && QFile::exists(QString(argv[1])))
 	  pro = argv[1];

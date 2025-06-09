@@ -38,8 +38,8 @@ bool FramePlayer::openSource(const QString &src) {
     if (vcap.isOpened())
         vcap.release();
     vcap.open(src.toStdString());
-    originalSize.width = vcap.get(CV_CAP_PROP_FRAME_WIDTH);
-    originalSize.height = vcap.get(CV_CAP_PROP_FRAME_HEIGHT);
+    originalSize.width = vcap.get(CAP_PROP_FRAME_WIDTH);
+    originalSize.height = vcap.get(CAP_PROP_FRAME_HEIGHT);
     killTimer(timerId);
     timerId = -1;
     currentPos = -1;
@@ -58,7 +58,7 @@ bool FramePlayer::openSource(const QString &src) {
 #endif
 
     filepath = src;
-    totalFrames = vcap.get(CV_CAP_PROP_FRAME_COUNT);
+    totalFrames = vcap.get(CAP_PROP_FRAME_COUNT);
     qDebug() << "total frames: " << totalFrames;
 
     interval = estimateInterval();
@@ -100,7 +100,7 @@ void FramePlayer::nextFrame() {
 
         vcap >> m;
 
-        //currentPos = vcap.get(CV_CAP_PROP_POS_FRAMES); //videocapture zlicza roznie przy roznych kodekach
+        //currentPos = vcap.get(CAP_PROP_POS_FRAMES); //videocapture zlicza roznie przy roznych kodekach
         currentPos++;
         if (currentPos >= totalFrames) {
             currentPos = totalFrames - 1;
@@ -182,7 +182,7 @@ void FramePlayer::setPos(long pos) {
         pos = totalFrames - 1;
     }
     currentPos = pos;
-    vcap.set(CV_CAP_PROP_POS_FRAMES, currentPos);
+    vcap.set(CAP_PROP_POS_FRAMES, currentPos);
     currentPos--;
     nextFrame();
 }
@@ -205,7 +205,7 @@ void FramePlayer::slowSetPos(long pos) {
         startPos = 0;
     }
 
-    vcap.set(CV_CAP_PROP_POS_FRAMES, startPos);
+    vcap.set(CAP_PROP_POS_FRAMES, startPos);
     for (; startPos < currentPos; startPos++) {
         vcap.grab();
     }
@@ -281,7 +281,7 @@ void FramePlayer::setStatusBar(QStatusBar *sb) {
 QString FramePlayer::codecName() {
     if (!vcap.isOpened())
         return "";
-    int ex = static_cast<int>(vcap.get(CV_CAP_PROP_FOURCC));
+    int ex = static_cast<int>(vcap.get(CAP_PROP_FOURCC));
     char EXT[] = {(char) (ex & 0XFF), (char) ((ex & 0XFF00) >> 8), (char) ((ex & 0XFF0000) >> 16),
                   (char) ((ex & 0XFF000000) >> 24), 0};
     return QString(EXT);
