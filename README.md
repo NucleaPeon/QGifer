@@ -3,6 +3,8 @@ QGifer
 
 QGifer is a tool for extracting part of a video to an animated GIF file.
 
+Qt5 Port created by Daniel Kettle <initial.dann@gmail.com>
+
 http://sourceforge.net/projects/qgifer/
 
     Author:  	Lukasz Chodyla <chodak166@op.pl>
@@ -43,16 +45,17 @@ http://sourceforge.net/projects/qgifer/
 Requirements
 ============
 
- * Qt version 4.8.0, or higher.
+ * Qt version 5.3.2, or higher.
  * OpenCV (core, highgui, imgproc) version 2.3 or higher.
  * giflib version 4.1 or higher.
- * CMake version 2.6 or higher.
+ * CMake version 3.10 or higher (may work in prior versions)
 
 
 Compilation and installation
 ============
 
-    cd qgifer_source_dir
+    git clone git@github.com:NucleaPeon/QGifer.git
+    cd QGifer
     mkdir build && cd build
     cmake .. -DCMAKE_INSTALL_PREFIX="/usr/local/" -DQUIET_MODE=ON
     make

@@ -1,6 +1,9 @@
 ### Example user template template
 ### Example user template
 
+# build directory
+build/
+
 # IntelliJ project files
 .idea
 *.iml

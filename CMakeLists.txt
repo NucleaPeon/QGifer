@@ -1,21 +1,58 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.10)
+
+SET(QGIFER_VERSION_RELEASE 0)
+SET(QGIFER_VERSION_MAJOR 3)
+SET(QGIFER_VERSION_MINOR 0)
+SET(QGIFER_VERSION_PATCH 0)
+
+project(QGifer
+        VERSION ${QGIFER_VERSION_RELEASE}.${QGIFER_VERSION_MAJOR}.${QGIFER_VERSION_MINOR}.${QGIFER_VERSION_PATCH}
+        LANGUAGES C CXX
+        DESCRIPTION "Gif Editor Application"
+)
+
+include(GNUInstallDirs)
+include(CTest)
+
+# Immediately set the version.h header
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in
+    ${CMAKE_CURRENT_SOURCE_DIR}/version.h @ONLY)
+
+if (APPLE)
+    set(CMAKE_C_COMPILER /usr/bin/clang)
+    set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+endif()
+
+set(TARGET_NAME ${PROJECT_NAME})
+
+#------------------------------------------------------
+#---------------------- Qt5 ---------------------------
+#------------------------------------------------------
+
+find_package(Qt5 REQUIRED
+    Core
+    Gui
+    Widgets
+    Test
+)
+
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+message(STATUS "${PROJECT_NAME} is the project name")
 
 
 #------------------------------------------------------
 #-------------------- GENERAL -------------------------
 #------------------------------------------------------
 
-PROJECT(QGifer)
-SET(TARGET_NAME qgifer)
 
 
-SET(QGIFER_VERSION_MAJOR 0)
-SET(QGIFER_VERSION_MINOR 2)
-SET(QGIFER_VERSION_PATCH 3)
 # choices between "a", "b", "rc" and empty string for release
 SET(QGIFER_VERSION_PRERELEASE_TAG rc)
 SET(QGIFER_VERSION_PRERELEASE_VERSION 2)
-SET(QGIFER_VERSION "${QGIFER_VERSION_MAJOR}.${QGIFER_VERSION_MINOR}.${QGIFER_VERSION_PATCH}")
 
 IF(QGIFER_VERSION_PRERELEASE_TAG)
     SET(QGIFER_VERSION "${QGIFER_VERSION}-${QGIFER_VERSION_PRERELEASE_TAG}${QGIFER_VERSION_PRERELEASE_VERSION}")
@@ -49,11 +86,14 @@ IF(WIN32)
 ENDIF(WIN32)
 
 FIND_PACKAGE(OpenCV REQUIRED core highgui imgproc videoio)
-FIND_PACKAGE(Qt4 REQUIRED QtCore QtGui)
 FIND_PACKAGE(GIF REQUIRED)
 
-INCLUDE(${QT_USE_FILE})
-ADD_DEFINITIONS(${QT_DEFINITIONS})
+include_directories(BEFORE res)
+include_directories(BEFORE src)
+include_directories(BEFORE ui)
+
+# INCLUDE(${QT_USE_FILE})
+# ADD_DEFINITIONS(${QT_DEFINITIONS})
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -Wno-reorder -Wno-sign-compare" )
 # TODO Crosscompile
@@ -105,6 +145,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}
 )
 
 SET(HEADERS
+        version.h
         src/gifcreator.h
         src/textrenderer.h
         src/utils/qgiferformatter.h
@@ -187,13 +228,12 @@ SET(DOCS
         doc/LICENSE
         doc/README
 )
-
+#[[
 QT4_WRAP_CPP(HEADERS_MOC ${QT_HEADERS})
 QT4_WRAP_UI(FORMS_HEADERS ${FORMS})
-QT4_ADD_RESOURCES(RESOURCES_RCC ${RESOURCES})
+QT4_ADD_RESOURCES(RESOURCES_RCC ${RESOURCES})]]
 
 IF(WIN32)
-
 	SET(OPENCV_LIBS "-lopencv_core${CVLIB_SUFFIX} -lopencv_highgui${CVLIB_SUFFIX} -lopencv_imgproc${CVLIB_SUFFIX} -lopencv_videoio${CVLIB_SUFFIX}" )
 ELSE(WIN32)
 	SET(OPENCV_LIBS "-lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_videoio" )
@@ -217,7 +257,14 @@ if(MINGW)
 endif(MINGW)
 
 ADD_EXECUTABLE(${TARGET_NAME} ${WINDOWS_EXEC} ${SOURCES} ${HEADERS_MOC} ${FORMS_HEADERS} ${RESOURCES_RCC} ${RES_FILES})
-TARGET_LINK_LIBRARIES(${TARGET_NAME} ${QT_LIBRARIES} ${OpenCV_LIBS} ${GIF_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Test)
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
+target_link_libraries(${PROJECT_NAME} ${GIF_LIBRARIES})
+# TARGET_LINK_LIBRARIES(${TARGET_NAME} ${QT_LIBRARIES} ${OpenCV_LIBS} ${GIF_LIBRARIES})
+
+target_include_directories(${PROJECT_NAME} BEFORE PRIVATE .. )
+target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
+target_include_directories(${PROJECT_NAME} BEFORE PRIVATE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/${PROJECT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/)
 
 IF(UNIX)
 	INSTALL(TARGETS ${TARGET_NAME} DESTINATION ${BIN_INSTALL_DIR})

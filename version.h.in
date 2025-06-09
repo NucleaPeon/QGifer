@@ -1,0 +1,22 @@
+#ifndef QGIFER_VERSION_H
+#define QGIFER_VERSION_H
+
+// Compiler accessible definitions
+
+#define QGIFER_VERSION_RELEASE "@PROJECT_VERSION_MAJOR@"
+#define QGIFER_VERSION_MAJOR "@PROJECT_VERSION_MINOR@"
+#define QGIFER_VERSION_MINOR "@PROJECT_VERSION_PATCH@"
+#define QGIFER_VERSION_PATCH "@PROJECT_VERSION_TWEAK@"
+
+// Program accessible definitions
+
+namespace QGifer {
+    namespace Version {
+        const int RELEASE = @PROJECT_VERSION_MAJOR@;
+        const int MAJOR = @PROJECT_VERSION_MINOR@;
+        const int MINOR = @PROJECT_VERSION_PATCH@;
+        const int PATCH = @PROJECT_VERSION_TWEAK@;
+    }
+}
+
+#endif // QGIFER_VERSION_H

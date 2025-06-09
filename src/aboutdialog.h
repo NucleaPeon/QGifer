@@ -32,9 +32,10 @@ public:
      AboutDialog();
      virtual ~AboutDialog();
      void retranslate(){retranslateUi(this);}
-private:
 
-     private slots:
+private slots:
+
+private:
 
 };
 

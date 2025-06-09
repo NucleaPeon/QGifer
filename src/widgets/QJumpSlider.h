@@ -8,9 +8,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 
-#include <QtGui/QSlider>
+#include <QtWidgets/QSlider>
 #include <QtGui/QMouseEvent>
-#include <QtGui/QWidget>
 
 class QJumpSlider : public QSlider {
 Q_OBJECT
