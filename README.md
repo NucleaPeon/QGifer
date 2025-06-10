@@ -7,7 +7,7 @@ Qt5 Port created by Daniel Kettle <initial.dann@gmail.com>
 
 Area of concern:
 
-* [ ] giflib removed the Quantizer code. 
+* giflib removed the Quantizer code. 
 * - https://github.com/mldbai/giflib/blob/master/lib/quantize.c
 * - https://bugs.gentoo.org/682198
 * - https://github.com/rainycape/magick/issues/36
