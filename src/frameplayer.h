@@ -36,7 +36,9 @@
 using namespace cv;
 
 class FramePlayer : public QWidget, public Ui::FramePlayerForm {
-Q_OBJECT;
+
+    Q_OBJECT
+    Q_ENUMS(Status)
 
 public:
     enum Status {
@@ -133,7 +135,7 @@ private:
     bool raw;
     bool is_reverse_play = false;
 
-    void timerEvent(QTimerEvent *);
+    void timerEvent(QTimerEvent *event);
 
     void updateSlider(int pos);
 

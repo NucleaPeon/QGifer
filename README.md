@@ -1,7 +1,18 @@
 QGifer
 ======
 
+## Introduction
+
 QGifer is a tool for extracting part of a video to an animated GIF file.
+
+Since this is a fork and has no issue tracker associated with it, the issues I'm working on will go here:
+
+## Issues
+
+* [ ] Unable to save gif image. Creates a black gif file of 3.4 Kb. Message below may be part of the issue:
+```
+QObject::killTimer(): Error: timer id -1 is not valid for object 0x55a6d1e2aa80 (FramePlayer, player), timer has not been killed
+```
 
 Qt5 Port created by Daniel Kettle <initial.dann@gmail.com>
 
@@ -13,7 +24,10 @@ Area of concern:
 * - https://github.com/rainycape/magick/issues/36
 * - https://sourceforge.net/p/giflib/bugs/142/
 
+## Original Author License
+
 http://sourceforge.net/projects/qgifer/
+
 
     Author:  	Lukasz Chodyla <chodak166@op.pl>
     Author:		Arkadii Ivanov <apkawa@gmail.com>
@@ -54,8 +68,8 @@ Requirements
 ============
 
  * Qt version 5.3.2, or higher.
- * OpenCV (core, highgui, imgproc) version 2.3 or higher.
- * giflib version 4.1 or higher.
+ * OpenCV (core, highgui, imgproc) version 4 or higher.
+ * giflib version 4.1 or higher?
  * CMake version 3.10 or higher (may work in prior versions)
 
 

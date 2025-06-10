@@ -932,7 +932,7 @@ bool MainWindow::projectFromXml(const QString &xstr) {
 
 QString MainWindow::projectDir() {
     QString pdir;
-#if defined(Q_WS_X11)
+#if defined(Q_WS_X11) || defined(Q_OS_LINUX)
     QDir dir("/usr/share/qgifer/");
     if (dir.exists())
         pdir = set->value("project_path", "/usr/share/qgifer/").toString();

@@ -35,11 +35,13 @@ FramePlayer::~FramePlayer() {
 }
 
 bool FramePlayer::openSource(const QString &src) {
+    qDebug() << Q_FUNC_INFO << src;
     if (vcap.isOpened())
         vcap.release();
     vcap.open(src.toStdString());
     originalSize.width = vcap.get(CAP_PROP_FRAME_WIDTH);
     originalSize.height = vcap.get(CAP_PROP_FRAME_HEIGHT);
+    qDebug() << "kill timer" << timerId;
     killTimer(timerId);
     timerId = -1;
     currentPos = -1;
@@ -51,7 +53,7 @@ bool FramePlayer::openSource(const QString &src) {
 
     qDebug() << "FramePlayer::openSource new video loaded: " << src;
 
-#if defined(Q_WS_X11)
+#if defined(Q_WS_X11) || defined(Q_OS_LINUX)
     QString codec = codecName();
     raw = (codec == "MJPG" || codec == "I420" || codec == "YUV4");
     qDebug() << "codec name: " << codecName();
@@ -75,6 +77,7 @@ bool FramePlayer::openSource(const QString &src) {
 }
 
 void FramePlayer::close() {
+    qDebug() << Q_FUNC_INFO;
     stop();
     vcap.release();
     //fakeFrames += frames;
@@ -88,6 +91,7 @@ void FramePlayer::close() {
 }
 
 void FramePlayer::nextFrame() {
+    qDebug() << Q_FUNC_INFO;
     if (!vcap.isOpened()) {
         return;
     }
@@ -126,8 +130,8 @@ void FramePlayer::nextFrame() {
 }
 
 void FramePlayer::reverse_play() {
+    qDebug() << Q_FUNC_INFO << "timerId" << timerId;
     // todo optimize
-    qDebug() << "PLAY reversed:";
     is_reverse_play = true;
     if (!countFrames()) {
         return;
@@ -143,7 +147,7 @@ void FramePlayer::reverse_play() {
 }
 
 void FramePlayer::play() {
-    qDebug() << "PLAY";
+    qDebug() << Q_FUNC_INFO << "timerId" << timerId;
     is_reverse_play = false;
     if (!countFrames()) {
         return;
@@ -161,17 +165,20 @@ void FramePlayer::play() {
 }
 
 void FramePlayer::stop() {
+    qDebug() << Q_FUNC_INFO;
     pause();
     seek(0);
 }
 
 void FramePlayer::pause() {
+    qDebug() << Q_FUNC_INFO << "timerId" << timerId;
     killTimer(timerId);
     timerId = -1;
     updateStatus(Stopped);
 }
 
 void FramePlayer::setPos(long pos) {
+    qDebug() << Q_FUNC_INFO << pos;
     if (!vcap.isOpened())
         return;
 
@@ -188,6 +195,7 @@ void FramePlayer::setPos(long pos) {
 }
 
 void FramePlayer::slowSetPos(long pos) {
+    qDebug() << Q_FUNC_INFO;
     if (!vcap.isOpened()) {
         return;
     }
@@ -214,7 +222,7 @@ void FramePlayer::slowSetPos(long pos) {
 }
 
 void FramePlayer::seek(int pos) {
-    qDebug() << "seeking pos: " << pos;
+    qDebug() << Q_FUNC_INFO << pos;
     if (status != Playing && abs(currentPos - pos) < 55) {
         slowSetPos(pos);
     } else {
@@ -222,7 +230,8 @@ void FramePlayer::seek(int pos) {
     }
 }
 
-void FramePlayer::timerEvent(QTimerEvent *) {
+void FramePlayer::timerEvent(QTimerEvent *event) {
+    qDebug() << Q_FUNC_INFO << event;
     if (is_reverse_play) {
         prevFrame();
     } else {
@@ -242,6 +251,7 @@ void FramePlayer::updateSlider(int pos) {
 }
 
 void FramePlayer::updateStatus(Status s) {
+    qDebug() << Q_FUNC_INFO;
     QString info = "";
     status = s;
     info = (status == Stopped ? "Stopped" : "Playing");
