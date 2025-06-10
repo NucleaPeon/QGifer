@@ -91,12 +91,6 @@ FIND_PACKAGE(GIF REQUIRED)
 include_directories(BEFORE res)
 include_directories(BEFORE src)
 include_directories(BEFORE ui)
-<<<<<<< HEAD
-=======
-
-# INCLUDE(${QT_USE_FILE})
-# ADD_DEFINITIONS(${QT_DEFINITIONS})
->>>>>>> 8ad31bb (Moved around ui files to directories where they can be more easily found)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -Wno-reorder -Wno-sign-compare" )
 
@@ -142,14 +136,14 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}
 	ui
 )
 
-SET(HEADERS
+list(APPEND HEADERS
         version.h
         src/gifcreator.h
         src/textrenderer.h
         src/utils/qgiferformatter.h
 )
 
-SET(QT_HEADERS
+list(APPEND QT_HEADERS
         src/frameplayer.h
         src/previewwidget.h
         src/mainwindow.h
@@ -173,7 +167,7 @@ SET(QT_HEADERS
 
 )
 
-SET(SOURCES
+list(APPEND SOURCES
         src/frameplayer.cpp
         src/main.cpp
         src/previewwidget.cpp
@@ -200,11 +194,11 @@ SET(SOURCES
         src/utils/qgiferformatter.cpp
 )
 
-SET(RESOURCES
+list(APPEND RESOURCES
         res.qrc
 )
 
-SET(FORMS
+list(APPEND FORMS
         ui/frameplayer.ui
         ui/mainwindow.ui
         ui/gifwidget.ui
@@ -215,7 +209,6 @@ SET(FORMS
         ui/textwidget.ui
         ui/interpolationdialog.ui
 )
-
 
 FILE(GLOB LOCALES
         "${CMAKE_CURRENT_SOURCE_DIR}/locale/*.qm"
@@ -255,7 +248,7 @@ if(MINGW)
     "<CMAKE_RC_COMPILER> <FLAGS> -O coff <DEFINES> -i <SOURCE> -o <OBJECT>")
 endif(MINGW)
 
-ADD_EXECUTABLE(${TARGET_NAME} ${WINDOWS_EXEC} ${SOURCES} ${HEADERS_MOC} ${FORMS_HEADERS} ${RESOURCES_RCC} ${RES_FILES})
+ADD_EXECUTABLE(${TARGET_NAME} ${WINDOWS_EXEC} ${SOURCES} ${HEADERS_MOC} ${FORMS_HEADERS} ${RES_FILES} ${RESOURCES})
 target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Test)
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(${PROJECT_NAME} ${GIF_LIBRARIES})

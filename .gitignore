@@ -4,6 +4,9 @@
 # build directory
 build/
 
+# autogen folders
+*_autogen/
+
 # IntelliJ project files
 .idea
 *.iml
