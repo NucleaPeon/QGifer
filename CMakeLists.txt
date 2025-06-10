@@ -91,6 +91,12 @@ FIND_PACKAGE(GIF REQUIRED)
 include_directories(BEFORE res)
 include_directories(BEFORE src)
 include_directories(BEFORE ui)
+<<<<<<< HEAD
+=======
+
+# INCLUDE(${QT_USE_FILE})
+# ADD_DEFINITIONS(${QT_DEFINITIONS})
+>>>>>>> 8ad31bb (Moved around ui files to directories where they can be more easily found)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -Wno-reorder -Wno-sign-compare" )
 
