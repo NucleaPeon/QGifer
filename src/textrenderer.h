@@ -6,6 +6,7 @@
 #include <QColor>
 #include <QString>
 #include <QPainter>
+#include <QPainterPath>
 #include <QPen>
 #include <QFontMetrics>
 #include <QPixmap>

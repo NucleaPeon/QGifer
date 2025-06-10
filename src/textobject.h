@@ -3,15 +3,16 @@
 
 #include "workspaceobject.h"
 #include <QColor>
+#include <QString>
 #include <QFont>
 
 class TextObject : public WorkspaceObject
 {
-     Q_OBJECT;
+     Q_OBJECT
 public:
-     TextObject(){};
-     virtual ~TextObject(){};
-     virtual QString getTypeName() const {return "TextObject";}
+     TextObject();
+     ~TextObject();
+     const QString getTypeName();
      void setFont(const QFont& f){font = f;}
      QFont getFont() const {return font;}
      void setTextColor(const QColor& tc){textColor = tc;}

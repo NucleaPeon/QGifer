@@ -186,6 +186,7 @@ SET(SOURCES
         src/textwidget.cpp
         src/textrenderer.cpp
         src/interpolationdialog.cpp
+        src/textobject.cpp
 
         src/widgets/QJumpSlider.cpp
         src/widgets/QPressAction.cpp
