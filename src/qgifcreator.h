@@ -36,6 +36,7 @@ public:
      
      Byte* imageData(const QImage& img);
      void prepareFrame(QImage* img, ColorMapObject* map, bool dither = true);
+
 private:
      bool savingProgress(int p);
      void endProgress() {

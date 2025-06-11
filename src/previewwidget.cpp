@@ -36,16 +36,20 @@ PreviewWidget::~PreviewWidget()
 void PreviewWidget::setImage(const QImage& img, const QSize& size, 
 			     bool forceRatio, bool forceSmooth)
 {
-     if(img.isNull())
-	  return;
+    qDebug() << Q_FUNC_INFO << img << size << forceRatio << forceSmooth;
+     if(img.isNull()) {
+         qDebug() << "null image";
+         return;
+     }
 
      if(size.isNull())
      {
         imsize = img.size();
         setFixedSize(imsize);
      }
-     else
-	  imsize = size;
+     else {
+        imsize = size;
+     }
 
      origSize = img.size();
      image = img;
@@ -53,12 +57,13 @@ void PreviewWidget::setImage(const QImage& img, const QSize& size,
      // 	  setFixedSize(img.size());
      // else
      // {
+     qDebug() << image << zoom;
 	  image = image.scaled(
            imsize * zoom,
            (ratio || forceRatio) ? Qt::KeepAspectRatio : Qt::IgnoreAspectRatio,
            ((smooth || forceSmooth) ? Qt::SmoothTransformation : Qt::FastTransformation)
            );
-      	  //setFixedSize(imsize);
+          setFixedSize(imsize);
      // }
 	  update();
 	  // repaint();
@@ -69,6 +74,11 @@ void PreviewWidget::clear()
      QPixmap p(QSize(1,1));
      p.fill(Qt::transparent);
      setImage(p.toImage());
+}
+
+QImage* PreviewWidget::getImage()
+{
+   return &image;
 }
 
 void PreviewWidget::drawBackground(QPaintDevice* pd)

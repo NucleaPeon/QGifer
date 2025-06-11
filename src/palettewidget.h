@@ -27,7 +27,7 @@ class PaletteWidget : public QWidget
 {
      Q_OBJECT;
 public:
-     PaletteWidget(QWidget* parent=0, Qt::WindowFlags f=0);
+     PaletteWidget(QWidget* parent=0, Qt::WindowFlags f=Qt::Widget);
      virtual ~PaletteWidget();
      ColorMapObject* map() {return palette;}
      ColorMapObject* mapCopy() {return GifMakeMapObject(palette->ColorCount, palette->Colors);}

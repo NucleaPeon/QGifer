@@ -53,6 +53,7 @@ GifCreator::~GifCreator()
 
 bool GifCreator::save(const char* filename, int every)
 {
+	qDebug() << "Saving using giflib version " << GIFLIB_MAJOR << GIFLIB_MINOR << GIFLIB_RELEASE;
      if (!frames.size() || !cmaps.size()) 
      {
 	  cerr << "ERROR: no frames or color map found!";
@@ -153,6 +154,7 @@ bool GifCreator::save(const char* filename, int every)
      }
 
      //comment
+     qDebug() << "Putting comment on gif";
      if(EGifPutComment(GifFile,"This GIF file was created using QGifer") == GIF_ERROR){
 	  PrintGifError();
 	  endProgress();

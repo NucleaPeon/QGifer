@@ -90,8 +90,10 @@ void GifWidget::createActions()
 
 void GifWidget::play()
 {
+    qDebug() << "GifWidget" << "play()";
      if(timerId == -1)
      {
+         qDebug() << intervalBox->value();
 	  timerId = startTimer(intervalBox->value());
 	  skipped = 0;
 	  currentFrame = 0;
@@ -150,6 +152,7 @@ void GifWidget::save()
 
 void GifWidget::saveGif(const QString& filename)
 {
+    qDebug() << Q_FUNC_INFO << filename;
      pause();
      gif->setDuration((double)intervalBox->value() / 1000);
      if(reverseBox->isChecked()) {
@@ -163,6 +166,7 @@ void GifWidget::saveGif(const QString& filename)
 	  //PrintGifError(); przeniesione do save
      }
      gif->removeReversedCopy();
+     qDebug() << "saved Gif";
      emit gifSaved(filename);
 }
 
@@ -178,8 +182,9 @@ unsigned long GifWidget::getEstimateSize()
 
 
 
-void GifWidget::timerEvent(QTimerEvent*)
+void GifWidget::timerEvent(QTimerEvent* event)
 {
+    qDebug() << Q_FUNC_INFO;
 
      preview->setImage(prevFrames.at(currentFrame));
      int d = saveEveryBox->isChecked() ? seBox->value() : 1;
@@ -198,8 +203,5 @@ void GifWidget::timerEvent(QTimerEvent*)
 	  currentFrame = prevFrames.size()-1;
 	  reversePlay = true;
      }
-
-
-     
 }
 

@@ -69,7 +69,7 @@ private:
      int timerId;
      int currentFrame;
      int skipped;
-     void timerEvent(QTimerEvent*);
+     void timerEvent(QTimerEvent* event);
 
 public slots:
 	  void save();

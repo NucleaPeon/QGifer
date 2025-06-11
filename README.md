@@ -24,6 +24,12 @@ Area of concern:
 * - https://github.com/rainycape/magick/issues/36
 * - https://sourceforge.net/p/giflib/bugs/142/
 
+## TODO
+
+* [ ] Set the capture range to the entire video
+* [ ] Figure out why preview isn't working
+* [ ] 
+
 ## Original Author License
 
 http://sourceforge.net/projects/qgifer/

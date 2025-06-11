@@ -15,7 +15,7 @@ class Workspace : public PreviewWidget
 {
      Q_OBJECT;
 public:
-     Workspace(QWidget* parent=0, Qt::WindowFlags f=0);
+     Workspace(QWidget* parent=0, Qt::WindowFlags f=Qt::Widget);
      virtual ~Workspace();
 
      QMargins* margins(){return &mr;}
@@ -44,7 +44,7 @@ private:
      void mouseReleaseEvent(QMouseEvent*);
      void mousePressEvent(QMouseEvent*);
      void leaveEvent(QEvent*){if(menuExecuted)return;hoverObject(-1, Qt::ArrowCursor);}
-     void wheelEvent(QWheelEvent* e){emit wheelRotated(e->delta());}
+     void wheelEvent(QWheelEvent* e){emit wheelRotated(e->angleDelta().y());}
      void updateMargins(); //uruchamiane podczas przeciagania
      void hoverObject(int i, const QCursor& c);
      void execObjectMenu(const QPoint& p);

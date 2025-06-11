@@ -34,6 +34,7 @@ QGifCreator::~QGifCreator()
 
 void QGifCreator::prepareFrame(QImage* img, ColorMapObject* map, bool dither)
 {
+    qDebug() << Q_FUNC_INFO;
      if(!map && cmaps.size()) {
 	  map = cmaps.at(cmaps.size()-1);
      }
@@ -44,11 +45,11 @@ void QGifCreator::prepareFrame(QImage* img, ColorMapObject* map, bool dither)
      //Frame frame(img->bytesPerLine()*img->height());
      
 
-     // qDebug() << "preparing frame...";
-     // qDebug() << "bpl*h = " << img->bytesPerLine()*img->height();
-     // qDebug() << "byte count: " << img->byteCount();
-     // qDebug() << "w*h*3: " << img->height()*img->width()*3;
-     // qDebug() << "difference: " << img->byteCount() - (img->height()*img->width()*3);
+     qDebug() << "preparing frame...";
+     qDebug() << "bpl*h = " << img->bytesPerLine()*img->height();
+     qDebug() << "byte count: " << img->sizeInBytes();
+     qDebug() << "w*h*3: " << img->height()*img->width()*3;
+     qDebug() << "difference: " << img->sizeInBytes() - (img->height()*img->width()*3);
 
      const int step = img->format() == QImage::Format_RGB888 ? 3 : 4;
      const int npix = img->width()*img->height();

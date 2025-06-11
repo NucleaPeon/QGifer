@@ -240,6 +240,7 @@ bool MainWindow::openVideo(const QString &path) {
 
 
 void MainWindow::extractGif() {
+    qDebug() << Q_FUNC_INFO;
     if (startBox->value() > stopBox->value()) {
         QMessageBox::critical(this, tr("Error"), tr("The range is invalid!"));
         return;

@@ -413,8 +413,9 @@ void Workspace::drawSelection(QPaintDevice* pd)
 
 void Workspace::execObjectMenu(const QPoint& p)
 {
-     if(!hoveredObject)
-	  return;
+     if(!hoveredObject) {
+        return;
+     }
 
 	  QMenu* m = new QMenu(this);
 	  QAction* btf = new QAction(tr("Bring to &front"),m);

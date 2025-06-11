@@ -10,8 +10,8 @@ class ObjectWidget : public QWidget, public Ui::ObjectWidget, public Retranslata
 {
      Q_OBJECT;
 public:
-     ObjectWidget(FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=0);
-     ObjectWidget(WorkspaceObject* wo, FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=0);
+     ObjectWidget(FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=Qt::Widget);
+     ObjectWidget(WorkspaceObject* wo, FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=Qt::Widget);
      virtual ~ObjectWidget();
      void setPlayer(FramePlayer* p);
      void setRange(int from, int to){fromBox->setValue(from);toBox->setValue(to);}

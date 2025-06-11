@@ -13,8 +13,8 @@ class TextWidget : public QWidget, public Ui::TextWidget, public Retranslatable
 {
      Q_OBJECT;
 public:
-     TextWidget(TextObject* to, FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=0);
-     TextWidget(FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=0);
+     TextWidget(TextObject* to, FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=Qt::Widget);
+     TextWidget(FramePlayer* fp, QWidget* parent=0, Qt::WindowFlags f=Qt::Widget);
      virtual ~TextWidget();
      void setRange(int from, int to){fromBox->setValue(from);toBox->setValue(to);}
      void retranslate(){retranslateUi(this);setCaptions();}

@@ -116,11 +116,14 @@ void FramePlayer::nextFrame() {
         }
         currentFrame = QImage((uchar *) m.data, m.cols, m.rows, m.step,
                               QImage::Format_RGB888).rgbSwapped();
+        qDebug() << currentFrame;
     }
     else {
+        qDebug() << "Returning from nextFrame()";
         return;
     }
 
+    qDebug() << "Workspace set image" << frame->size();
     workspace->setImage(currentFrame, frame->size());
     workspace->updateFrameIndex(currentPos);
     emit frameChanged(currentPos);

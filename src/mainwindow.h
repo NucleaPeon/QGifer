@@ -33,7 +33,7 @@
 #include "ui_mainwindow.h"
 
 class MainWindow : public QMainWindow, private Ui::MainWindow, public Retranslatable {
-Q_OBJECT;
+    Q_OBJECT
 public:
     MainWindow();
 
@@ -62,7 +62,7 @@ private:
 
     void closeEvent(QCloseEvent *e);
 
-    bool checkFFMPEG() { return !QProcess::execute("ffmpeg -version"); }
+    bool checkFFMPEG() { return !QProcess::execute("ffmpeg", QStringList() << "-version"); }
 
     QString projectRelativePath(const QString &path);
 

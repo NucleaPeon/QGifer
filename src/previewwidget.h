@@ -32,29 +32,36 @@
 
 class PreviewWidget : public QWidget
 {
-     Q_OBJECT;
+     Q_OBJECT
+
 public:
-     PreviewWidget(QWidget* parent=0, Qt::WindowFlags f=0);
+     PreviewWidget(QWidget* parent=0, Qt::WindowFlags f=Qt::Widget);
      virtual ~PreviewWidget();
-     void setImage(const QImage& img, const QSize& size = QSize(0,0), 
-		   bool forceRatio = false, bool forceSmooth = false);
-     virtual QImage* getImage() {return &image;}
-     const QPoint* getCursorPos() const {return underMouse() ? &cpos : NULL;}
-     const double normalizedX() const 
-     {return image.isNull() ? -1 : (double)(cpos.x()-((1-zoom)/2*width()))/(double)image.width();}
-     const double normalizedY() const 
-     {return image.isNull() ? -1 : (double)(cpos.y()-((1-zoom)/2*height()))/(double)image.height();}
-     void enableAntialiasing(bool enable) {smooth = enable;}
-     virtual void clear();
-     void keepAspectRatio(bool keep){
-         ratio = keep;
-     }
-     void setZoom(double z) {zoom = z;}
-     double getZoom() const {return zoom;}
-     static void applyCorrection(QImage* img, int h, int s, int v, 
-				 bool toRGB888 = true, QRect rect = QRect());
-     void enableBackground(bool e){drawBkg=e;}
-     void updateBackground(){updateBkg=true;}
+
+     void setImage(
+         const QImage& img, const QSize& size = QSize(0,0),
+         bool forceRatio = false, bool forceSmooth = false
+    );
+    QImage* getImage();
+    const QPoint* getCursorPos() const {return underMouse() ? &cpos : NULL;}
+    const double normalizedX() const
+    {return image.isNull() ? -1 : (double)(cpos.x()-((1-zoom)/2*width()))/(double)image.width();}
+    const double normalizedY() const
+    {return image.isNull() ? -1 : (double)(cpos.y()-((1-zoom)/2*height()))/(double)image.height();}
+    void enableAntialiasing(bool enable) {smooth = enable;}
+    virtual void clear();
+    void keepAspectRatio(bool keep){
+        ratio = keep;
+    }
+    void setZoom(double z) {zoom = z;}
+    double getZoom() const {return zoom;}
+    static void applyCorrection(
+        QImage* img, int h, int s, int v,
+        bool toRGB888 = true, QRect rect = QRect()
+    );
+    void enableBackground(bool e){drawBkg=e;}
+    void updateBackground(){updateBkg=true;}
+
 protected:
      virtual void paintEvent(QPaintEvent*);
      virtual void drawBackground(QPaintDevice*);
