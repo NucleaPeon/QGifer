@@ -4,6 +4,8 @@
 # build directory
 build/
 
+CMakeLists.txt.user
+
 # autogen folders
 *_autogen/
 
